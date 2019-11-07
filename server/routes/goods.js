@@ -139,14 +139,14 @@ mongoose.connection.on('disconnected', () => {
 //   console.log(result)
 // })
 
-goods.find({productName: '张三'}, function (err, good) {
-  var opts = [{ path: 'company', match: { x: 1 }, select: 'name' }]
-  var promise = goods.populate(good, opts);
-  promise.then(function (err, res) {
-    console.log(res)
-    console.log(err)
-  })
-})
+// goods.find({productName: '张三'}, function (err, good) {
+//   var opts = [{ path: 'company', match: { x: 1 }, select: 'name' }]
+//   var promise = goods.populate(good, opts);
+//   promise.then(function (err, res) {
+//     console.log(res)
+//     console.log(err)
+//   })
+// })
 
 
 
