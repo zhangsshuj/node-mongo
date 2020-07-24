@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose')
 var user = require('../models/users')
-var assert = require('assert')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

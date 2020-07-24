@@ -6,6 +6,13 @@ var logger = require('morgan');//日志插件
 var ejs = require('ejs')
 var favicon = require('express-favicon')
 
+// 开发机测试配置：启动redis服务后加 --protected-mode no 选项 使其允许远程连接
+
+var redis = require('redis')
+var db = redis.createClient({ "host": "127.0.0.1", "port": "6379" });
+// console.log(db)
+
+
 require('./utils/util')
 
 var indexRouter = require('./routes/index');//index路由
@@ -26,6 +33,25 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname,'../public/images/favicon.ico')));
+
+// app.use(function(req, res, next){
+//   var ua = req.headers['user-agent'];
+//   db.zadd('online', Date.now(), ua, next);
+// });
+
+// app.use(function(req, res, next){
+//   var min = 60 * 1000;
+//   var ago = Date.now() - min;
+//   db.zrevrangebyscore('online', '+inf', ago, function(err, users){
+//     if (err) return next(err);
+//     req.online = users;
+//     next();
+//   });
+// });
+//
+// app.get('/', function(req, res){
+//   res.send(req.online.length + ' users online');
+// });
 
 app.use((req, res, next) => {
     if (req.cookies.userId) {
